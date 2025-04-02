@@ -1,0 +1,41 @@
+Option Explicit
+
+Public Sub WyslijMail()
+Dim Poczta As Object
+Dim MojMail As Object
+Dim i As Range
+Dim strLocation As String
+'Dim strLocation2 As String
+
+
+strLocation = Range("f16").Value
+'strLocation2 = Range("d3").Value
+
+For Each i In Range("a2:a220")
+'For Each i In Range("a162:a175")
+'For Each i In Range("a201:a400")
+'For Each i In Range("a401:a618")
+'For Each i In Range("a601:a603")
+'For Each i In Range("e2:e10")
+'For Each i In Range("E11")
+'For Each i In Range("D2")
+
+Set Poczta = CreateObject("outlook.application")
+Set MojMail = Poczta.createitem(0)
+
+
+    With MojMail
+        .To = i
+        .Subject = Range("G2")
+        .ReadReceiptRequested = False
+        .OriginatorDeliveryReportRequested = False
+        .body = Range("H2")
+        .Attachments.Add strLocation
+        '.Attachments.Add strLocation2
+        '.Display
+        .send
+    End With
+    
+Next i
+
+End Sub
